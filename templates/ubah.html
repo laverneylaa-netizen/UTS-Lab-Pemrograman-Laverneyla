@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block isi %}
+<section class="kartu">
+    <h2>Ubah Data Mahasiswa</h2>
+    <p class="label-kecil">NIM {{ isian.nim }} (tidak dapat diubah)</p>
+
+    <form method="POST" class="form-grid">
+        <label>Nama
+            <input name="nama" value="{{ isian.nama }}">
+        </label>
+        <label>Program Studi
+            <input name="program_studi" value="{{ isian.program_studi }}">
+        </label>
+        <label>Angkatan
+            <input name="angkatan" type="number" value="{{ isian.angkatan }}">
+        </label>
+        <label>IPK
+            <input name="ipk" value="{{ isian.ipk }}">
+        </label>
+        <button type="submit" class="tombol utama">Simpan Perubahan</button>
+        <a class="tombol" href="{{ url_for('beranda') }}">Batal</a>
+    </form>
+</section>
+{% endblock %}

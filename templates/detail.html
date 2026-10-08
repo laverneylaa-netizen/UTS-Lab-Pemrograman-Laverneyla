@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block isi %}
+<section class="kartu profil">
+    <p class="label-kecil">NIM {{ mhs.nim }}</p>
+    <h2>{{ mhs.nama }}</h2>
+
+    <dl>
+        <dt>Program Studi</dt> <dd>{{ mhs.program_studi }}</dd>
+        <dt>Angkatan</dt>      <dd>{{ mhs.angkatan }}</dd>
+        <dt>IPK</dt>           <dd>{{ "%.2f"|format(mhs.ipk) }}</dd>
+        <dt>Lama Studi</dt>    <dd>{{ mhs.lama_studi }} tahun</dd>
+    </dl>
+
+    <a class="tombol utama" href="{{ url_for('ubah', nim=mhs.nim) }}">Ubah Data</a>
+    <a class="tombol" href="{{ url_for('beranda') }}">Kembali</a>
+</section>
+{% endblock %}

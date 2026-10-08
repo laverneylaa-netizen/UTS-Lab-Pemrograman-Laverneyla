@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistem Data Mahasiswa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='gaya.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <a href="{{ url_for('beranda') }}">Sistem Data Mahasiswa</a>
+    </header>
+
+    <main class="wadah">
+        {% for pesan in get_flashed_messages() %}
+            <p class="info">{{ pesan }}</p>
+        {% endfor %}
+
+        {% if salah %}
+            <div class="galat">
+                <strong>Data belum bisa disimpan:</strong>
+                <ul>
+                    {% for s in salah %}<li>{{ s }}</li>{% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% block isi %}{% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block isi %}
+<section class="kartu">
+    <h2>Tambah Mahasiswa</h2>
+    <form method="POST" action="{{ url_for('simpan') }}" class="form-grid">
+        <label>NIM
+            <input name="nim" value="{{ isian.nim or '' }}">
+        </label>
+        <label>Nama
+            <input name="nama" value="{{ isian.nama or '' }}">
+        </label>
+        <label>Program Studi
+            <input name="program_studi" value="{{ isian.program_studi or '' }}">
+        </label>
+        <label>Angkatan
+            <input name="angkatan" type="number" value="{{ isian.angkatan or '' }}">
+        </label>
+        <label>IPK
+            <input name="ipk" value="{{ isian.ipk or '' }}">
+        </label>
+        <button type="submit" class="tombol utama">Simpan</button>
+    </form>
+</section>
+
+<section class="kartu">
+    <h2>Daftar Mahasiswa <span class="jumlah">{{ daftar|length }}</span></h2>
+    {% if daftar %}
+    <table>
+        <tr>
+            <th>NIM</th><th>Nama</th><th>Program Studi</th>
+            <th>Angkatan</th><th>IPK</th><th>Lama Studi</th><th>Aksi</th>
+        </tr>
+        {% for m in daftar %}
+        <tr>
+            <td>{{ m.nim }}</td>
+            <td><a href="{{ url_for('detail', nim=m.nim) }}">{{ m.nama }}</a></td>
+            <td>{{ m.program_studi }}</td>
+            <td>{{ m.angkatan }}</td>
+            <td>{{ "%.2f"|format(m.ipk) }}</td>
+            <td>{{ m.lama_studi }} tahun</td>
+            <td class="aksi">
+                <a class="tombol" href="{{ url_for('ubah', nim=m.nim) }}">Ubah</a>
+                <form method="POST" action="{{ url_for('hapus', nim=m.nim) }}"
+                      onsubmit="return confirm('Hapus data {{ m.nama }}?')">
+                    <button type="submit" class="tombol bahaya">Hapus</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p class="kosong">Belum ada mahasiswa yang terdaftar.</p>
+    {% endif %}
+</section>
+{% endblock %}
